@@ -8,8 +8,18 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://13.48.49.224:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 
-app.listen(5000, () => console.log("Backend running on port 5000"));
+app.listen(5000, "0.0.0.0", () =>
+  console.log("Backend running on port 5000")
+);
